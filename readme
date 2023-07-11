@@ -1,0 +1,4 @@
+includes permitidos:
+    stdint // uint8_t ...
+    stdarg // Funciones de argumentos variables.
+    stddef // size_t NULL
