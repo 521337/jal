@@ -1,0 +1,4 @@
+Think about:
+
+Make "jal/syscalls/syscalls.h" be "jal/syscalls.h"
+Make open(char *file, int mode, 0) be open(char *file, int mode).
