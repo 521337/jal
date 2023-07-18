@@ -1,3 +1,7 @@
+#ifndef MALLOC_H_
+#define MALLOC_H_
+
+// INICIALIZA EL CONTENIDO A 0.
 void *malloc(size_t size){
     int *plen;
     int len = size + sizeof(size); // Add sizeof( size ) for holding length.            
@@ -13,4 +17,6 @@ void free(void * ptr){
     len = *plen;                     // Read length                   
     munmap((void*)plen, len);
 }
+
+#endif // MALLOC_H_
 

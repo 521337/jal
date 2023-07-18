@@ -10,6 +10,7 @@
 #include "include/ssize.h"
 #include "include/resource.h" // getrlimit
 #include "include/lseek.h"    // LSEEK_* defines
+#include "include/dirent.h"
 #include "include/bpf.h"
 #include "include/stat.h"
 
@@ -35,9 +36,11 @@
 #define BIND_SYSCALL_NUMBER       49
 #define FORK_SYSCALL_NUMBER       57
 #define EXIT_SYSCALL_NUMBER       60
+#define FCHDIR_SYSCALL_NUMBER     81
 #define GETRLIMIT_SYSCALL_NUMBER  97
 #define SETRLIMIT_SYSCALL_NUMBER 160
 #define TIME_SYSCALL_NUMBER      201
+#define GETDENTS64_NUMBER        217
 #define BPF_SYSCALL_NUMBER       321
 #define CLONE3_SYSCALL_NUMBER    435 // Sin implementar.
 
@@ -195,6 +198,9 @@ _Noreturn void exit(int status){
     __builtin_unreachable();
 }
 
+int fchdir(int fd){
+    return syscall1(FCHDIR_SYSCALL_NUMBER, fd);
+}
 int getrlimit(int resource, struct rlimit *rlim){
     return syscall2(GETRLIMIT_SYSCALL_NUMBER, resource, (int64_t)rlim);
 }
@@ -205,6 +211,10 @@ int setrlimit(int resource, const struct rlimit *rlim){
 
 time_t time(time_t *tloc){
     return syscall1(TIME_SYSCALL_NUMBER, (int64_t)tloc);
+}
+
+ssize_t getdents64(int fd, struct linux_dirent64 *dirent, unsigned int count){
+    return syscall3(GETDENTS64_NUMBER, fd, (int64_t)dirent, count);
 }
 
 int bpf(int cmd, union bpf_attr *attr, unsigned int size){
