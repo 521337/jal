@@ -3,7 +3,7 @@
 
 #ifndef MMAPFILE_H_
 #define MMAPFILE_H_
-
+// fsfddsf
 char *mmapfile(char *file, int mode){
     int fd;
     struct stat st;
