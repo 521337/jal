@@ -4,7 +4,7 @@
 #ifndef MMAPFILE_H_
 #define MMAPFILE_H_
 // fsfddsf
-char *mmapfile(char *file, int mode, uint64_t file_size){
+char *mmapfile(char *file, int mode, uint64_t *file_size){
     int fd;
     struct stat st;
     char *addr;
